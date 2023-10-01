@@ -11,11 +11,11 @@ export const contractAddress : Readable<string> = readable("0xA81807c8d684C75B9A
 
 // Game
 export const ports: Readable<Port[]> = readable([
-    {id:0, name: "Center",         position: {x: 50, y: 50}, coordinate: {lat: 1, lon: 1}},
-    {id:1, name: "Random Port #1", position: {x: 10, y: 10}, coordinate: {lat: 1, lon: 1}},
-    {id:2, name: "Random Port #2", position: {x: 10, y: 70}, coordinate: {lat: 1, lon: 1}},
-    {id:3, name: "Random Port #3", position: {x: 70, y: 5},  coordinate: {lat: 1, lon: 1}},
-    {id:4, name: "Random Port #4", position: {x: 45, y: 27}, coordinate: {lat: 1, lon: 1}},
+    {id:0, name: "Rotterdam",         position: {x: 50, y: 50}, coordinate: {lat: 1, lon: 1}},
+    {id:1, name: "New York", position: {x: 10, y: 10}, coordinate: {lat: 1, lon: 1}},
+    {id:2, name: "Santos", position: {x: 10, y: 70}, coordinate: {lat: 1, lon: 1}},
+    {id:3, name: "Shanghai", position: {x: 70, y: 85},  coordinate: {lat: 1, lon: 1}},
+    {id:4, name: "Barcelona", position: {x: 45, y: 27}, coordinate: {lat: 1, lon: 1}},
 ])
 
 export const playerPortID: Writable<number> = writable()
