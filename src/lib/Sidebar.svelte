@@ -29,7 +29,7 @@
 		
 		const formattedDocks = docksArray.map((dock, index) => {
 			// Format the data as per your requirements
-			let source = dock.source === 0 ? "Random" : $ports.find((port) => port.id == dock.source)
+			let source = $ports.find((port) => port.id == dock.source)
 			let conditions = "Nominal"; // Default value
 
 			// You can add logic to determine conditions based on your requirements

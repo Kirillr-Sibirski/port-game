@@ -103,7 +103,7 @@
 				
 				const x = (port.position.x / 100) * clientWidth;
 				const y = (port.position.y / 100) * clientHeight;
-				const color = ($docks.find(dock => dock.source == port.id)) ? "white" : "grey"
+				const color = ($docks.find(dock => dock.source.id == port.id)) ? "white" : "grey"
 
 				_line(sx, sy, x, y, color)
 			}
