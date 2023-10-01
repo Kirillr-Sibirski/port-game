@@ -1,7 +1,7 @@
 <script lang="ts">
 	/* ------------------ IMPORTS ----------------- */
 	// Libraries
-	import { provider, signer, connected, docks, ports, contractAddress } from '$lib/stores'
+	import { provider, signer, connected, docks, ports, contractAddress, money, level } from '$lib/stores'
 	import { onMount } from 'svelte'
 	import { ethers } from 'ethers'
 	import ABI from "./ABI.json"
@@ -21,7 +21,9 @@
         const portContractAddress = contract.ports(address)
 
         const portContract = new ethers.Contract(portContractAddress, portABI, $signer)
-        const docksArray = await portContract.getAllDocks();
+        const docksArray = await portContract.getAllDocks()
+		const bMoney = await portContract.money()
+		const bLevel = await portContract.level()
 		
 		const formattedDocks = docksArray.map((dock, index) => {
 			// Format the data as per your requirements
@@ -39,6 +41,10 @@
 		});
 		console.log(formattedDocks)
         // Display that trade has happened on the frontend
+
+		$docks = formattedDocks
+		$money = bMoney
+		$level = bLevel
 	}
 
 	async function fetchProvider() {

@@ -20,4 +20,6 @@ export const ports: Readable<Port[]> = readable([
 
 export const playerPortID: Writable<number> = writable()
 export const docks:        Writable<Dock[]> = writable([])
-export const range:        Writable<number> = writable(10)
+export const money:        Writable<number> = writable(0)
+export const level:        Writable<number> = writable(0)
+// export const range:        Writable<number> = writable(10)

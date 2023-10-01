@@ -7,7 +7,7 @@ interface Port {
 
 interface Dock {
     id: number,
-    source: "Random"|Port,
+    source: number,
     conditions: "Nominal"|"Degraded"|"Poor",
 }
 

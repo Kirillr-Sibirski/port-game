@@ -1,7 +1,7 @@
 <script lang="ts">
 	/* ------------------ IMPORTS ----------------- */
 	// Libraries
-	import { ports, playerPortID } from '$lib/stores';
+	import { ports, playerPortID, docks } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { CanvasStyleProps } from './common';
 	// Components
@@ -103,9 +103,9 @@
 				
 				const x = (port.position.x / 100) * clientWidth;
 				const y = (port.position.y / 100) * clientHeight;
-				const color = "grey"
+				const color = ($docks.find(dock => dock.source == port.id)) ? "white" : "grey"
 
-				_line(sx, sy, x, y)
+				_line(sx, sy, x, y, color)
 			}
 		}
 
