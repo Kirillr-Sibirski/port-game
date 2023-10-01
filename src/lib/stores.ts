@@ -7,6 +7,8 @@ export const provider:  Writable<providers.Web3Provider|null> = writable(null)
 export const signer:    Writable<Signer|null>                 = writable(null)
 export const connected: Writable<boolean>                     = writable()
 
+export const contractAddress : Readable<string> = readable("0x4eAC0A60DC85469102Bf193613C672e9091205D0")
+
 // Game
 export const ports: Readable<Port[]> = readable([
     {id:0, name: "Center",         position: {x: 50, y: 50}, coordinate: {lat: 1, lon: 1}},
@@ -16,6 +18,6 @@ export const ports: Readable<Port[]> = readable([
     {id:4, name: "Random Port #4", position: {x: 45, y: 27}, coordinate: {lat: 1, lon: 1}},
 ])
 
-export const playerPortID: Writable<number|null> = writable(0)
-export const docks:  Writable<Dock[]>            = writable([])
-export const range:  Writable<number>            = writable(10)
+export const playerPortID: Writable<number> = writable()
+export const docks:        Writable<Dock[]> = writable([])
+export const range:        Writable<number> = writable(10)

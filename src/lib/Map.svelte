@@ -30,21 +30,21 @@
 	}
 
 	function draw() {
-		if (ctx === null) return
-
-		console.log("Drawing")
-
-		if (styleProps === undefined) styleProps = new CanvasStyleProps(ctx)
+		if (ctx === undefined || ctx === null) return;
+		if (styleProps === undefined) styleProps = new CanvasStyleProps(ctx);
 
 		function _node(x: number, y: number, r=radius, c="white", l=2, f="#1f1f1f") {
 			if (ctx === null) return
 
 			styleProps.save()
-			styleProps.overload([f, c, l])
+			ctx.strokeStyle = c
+			ctx.fillStyle = f
+			ctx.lineWidth = l
 
 			ctx.beginPath()
 			ctx.arc(x, y, r, 0, 2 * Math.PI)
 			ctx.stroke()
+			ctx.fill()
 			ctx.closePath()
 
 			styleProps.load()
@@ -62,32 +62,78 @@
 			styleProps.load()
 		}
 
+		function _line(x1, y1, x2, y2, s="white", l=2) {
+			if (ctx === null) return
+
+			styleProps.save()
+			ctx.strokeStyle = s
+			ctx.lineWidth = l
+			
+			ctx.beginPath()
+			ctx.moveTo(x1, y1)
+			ctx.lineTo(x2, y2)
+			ctx.stroke()
+			ctx.closePath()
+
+			styleProps.load()
+		}
+
+		ctx.clearRect(0, 0, clientWidth, clientHeight)
+
 		ctx.fillStyle = '#1f1f1f';
 		ctx.strokeStyle = 'white';
 		ctx.lineWidth = 1;
-		ctx.font = `${Math.floor(radius/2)}px sans`;
+		ctx.font = `${Math.floor(radius/2)}px Roboto`;
 
-		ctx.beginPath();
+		// Set 'own' port variables
+		let sx, sy, sport
+		if ($playerPortID != null) {
+			sport = $ports.find((port) => port.id == $playerPortID)
+			console.log("player port", sport)
 
+			sx = (sport.position.x / 100) * clientWidth
+			sy = (sport.position.y / 100) * clientHeight
+		}
+
+		// If no port initialized, do not draw connections
+		if ($playerPortID != null) {
+			for (let i=0; i < $ports.length; i++) {
+				const port = $ports[i];
+				if (port.id == sport.id) continue;
+				
+				const x = (port.position.x / 100) * clientWidth;
+				const y = (port.position.y / 100) * clientHeight;
+				const color = "grey"
+
+				_line(sx, sy, x, y)
+			}
+		}
+
+		// Draw nodes for each port
 		for (let i=0; i < $ports.length; i++) {
+			console.log($ports, $ports[i])
 			const port = $ports[i];
 
 			const x = (port.position.x / 100) * clientWidth;
 			const y = (port.position.y / 100) * clientHeight;
-			console.log(x, y);
+			let r = radius
 
+			if (sport != null && port.id === sport.id) {
+				r += 10
+				_node(sx, sy, r, "green", 4)
+			} else {
+				_node(x, y)
+			}
 
-			// ctx.moveTo(x + radius, y);
-			_node(x, y, ($playerPortID == i) ? radius + 10 : radius);
-			_text(port.name, x, y + 20)
+			const msg = port.name
+			const width = ctx.measureText(msg).width
+			_text(`${port.name}`, x-width/2, y+r+15)
 		}
-
-		ctx.stroke();
-		ctx.closePath();
 	}
 
 	/* ------------------ RUNTIME ----------------- */
-	$: (clientWidth, clientHeight) => resize(); // Update canvas on resize
+	$: (clientWidth, clientHeight) => resize() // Update canvas on resize
+	$: $ports, $playerPortID, draw()
 
 	onMount(() => {
 		ctx = canvas.getContext("2d");
