@@ -7,7 +7,7 @@ export const provider:  Writable<providers.Web3Provider|null> = writable(null)
 export const signer:    Writable<Signer|null>                 = writable(null)
 export const connected: Writable<boolean>                     = writable()
 
-export const contractAddress : Readable<string> = readable("0x4eAC0A60DC85469102Bf193613C672e9091205D0")
+export const contractAddress : Readable<string> = readable("0xA81807c8d684C75B9Aef5312324510A90fa51b7e")
 
 // Game
 export const ports: Readable<Port[]> = readable([

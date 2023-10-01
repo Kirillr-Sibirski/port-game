@@ -303,19 +303,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "requestRandomWords",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "requestId",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",

@@ -25,9 +25,9 @@ contract PortNFT is VRFConsumerBaseV2 {
     bytes32 keyHash =
         0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
 
-    uint32 callbackGasLimit = 100000;
+    uint32 callbackGasLimit = 2500000;
     uint16 requestConfirmations = 3;
-    uint32 numWords = 1;
+    uint32 numWords = 2;
     address contractOwner;
 
     constructor(
@@ -119,7 +119,7 @@ contract PortNFT is VRFConsumerBaseV2 {
     }
 
     function requestRandomWords()
-        public
+        internal
         returns (uint256 requestId)
     {
         // Will revert if subscription is not set and funded.

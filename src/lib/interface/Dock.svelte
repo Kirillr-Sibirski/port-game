@@ -13,8 +13,9 @@
     // Props
     export let dock: Dock
     // Internal
-    const sections: string[] = ["Source", "Conditions", "Expected Value"]
-    const values: any[] = [dock.source, dock.conditions, "XX$"]
+    const sections: string[] = ["Source", "Conditions"]
+    console.log(dock.source)
+    const values: any[] = [dock.source, dock.conditions]
 
 	/* ----------------- FUNCTIONS ---------------- */
     const contractABI = ABI
@@ -56,8 +57,8 @@
         <table class="pt-3 p-2 flex flex-col gap-2">
             {#each sections as section, i}
                 <tr class="flex flex-row">
-                    <td>{`${section}:`}</td>
-                    <td class="ml-auto">{values[i]}</td>
+                    <td class="text-neutral-300">{`${section}:`}</td>
+                    <td class="ml-auto text-neutral-300">{values[i]}</td>
                 </tr>
             {/each}
         </table>
